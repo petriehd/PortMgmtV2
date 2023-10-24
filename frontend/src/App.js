@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import StockTickerInput from "./components/StockDownload";
+import PortfolioDisplay from "./components/PortfolioDisplay";
+import './styles/App.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div className="grid-container">
+    <div className="grid-item-header"><Header /></div>
+    <div className="grid-item-ticker-input"><StockTickerInput /></div>
+    <div className="grid-item-portfolio-display"><PortfolioDisplay /></div>
+  </div>
+  )
 }
 
 export default App;
