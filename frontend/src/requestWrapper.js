@@ -1,6 +1,6 @@
 const FLASK_SERVER = "http://127.0.0.1:5000"
 
-function SendRequest(url, method, body) {
+async function SendRequest(url, method, body) {
   fetch(FLASK_SERVER + url, {
     method: method,
     headers: {
@@ -8,9 +8,15 @@ function SendRequest(url, method, body) {
     },
     body: JSON.stringify( body ), 
   })
-  .then((response) => response.json())
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
   .catch((error) => {
-    console.error('Error:', error);
+    console.log('Error:', error);
+    throw error; // Re-throw the error to be caught by the calling code
   });
 }
 

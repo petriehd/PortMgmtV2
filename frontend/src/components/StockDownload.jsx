@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/StockDownload.css';
 import SendRequest from '../requestWrapper'; 
 
 function StockTickerInput() {
-  const [tickerInputValue, setTickerInputValue, tickerStartDateValue, tickerEndDateValue ] = useState('');
+  const [tickerInputValue, setTickerInputValue, tickerStartDateValue, tickerEndDateValue, test, setTest ] = useState('');
 
   const handleDownloadStockClick = () => {
     const payload = {
@@ -13,6 +13,9 @@ function StockTickerInput() {
     }
 
     SendRequest('/test', 'POST', payload)
+    .then((response) => {
+      setTest(response);
+    })
     
   };
 
@@ -43,7 +46,8 @@ function StockTickerInput() {
           id="dateEndInput"
           value={tickerEndDateValue}
         />
-        <button className='grid-item-download-button' onClick={handleDownloadStockClick}>Download </button>
+        <button className='grid-item-download-button' onClick={handleDownloadStockClick}>Download</button>
+        <p>asd{test}</p>
       </div>
     </>
   )

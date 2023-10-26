@@ -1,16 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import logging
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "methods": ["GET", "POST", "PUT", "DELETE"]}})
 
-app.logger.setLevel(logging.DEBUG)  # Set the minimum log level to DEBUG
-
-# Add a custom log handler, such as a file handler
-file_handler = logging.FileHandler('app.log')
-file_handler.setLevel(logging.DEBUG)  # Set the log level for the file handler
-app.logger.addHandler(file_handler)
 
 @app.route("/")
 def hello_world():
@@ -18,8 +12,10 @@ def hello_world():
 
 @app.route("/test", methods=['POST'])
 def test():
-  data = request.get_json()
-  app.logger.debug('made it' + data)
+
+  test = 1
+  result = 1 *6
+  return jsonify(result=result)
 
 
 if __name__ == "__main__":
