@@ -13,9 +13,10 @@ def hello_world():
 @app.route("/test", methods=['POST'])
 def test():
 
-  test = 1
-  result = 1 *6
-  return jsonify(result=result)
+  data = {
+     test: 'sup'
+  }
+  return jsonify(data)
 
 
 if __name__ == "__main__":
