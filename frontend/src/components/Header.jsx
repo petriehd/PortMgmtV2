@@ -4,10 +4,12 @@ function Header() {
 
   return (
     <>
-      <h1 className='header'>Welcome</h1>
+      <div className='grid-container-header'>
+          <h1 className='grid-item-header-banner'>Welcome</h1>
+          <button className='grid-item-login-button'>Login</button>
+      </div>
     </>
   )
-
 }
 
 export default Header;

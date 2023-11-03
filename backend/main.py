@@ -5,11 +5,11 @@ from pymongo import MongoClient
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "methods": ["GET", "POST", "PUT", "DELETE"]}})
 
+# Need to change below
 client = MongoClient('mongodb+srv://jamesppetrie:ryGjbnNhJLbJ8CBf@portmgmttesting.bxlefpc.mongodb.net/')
 
-@app.route("/")
-def hello_world():
-  return "<p>Hello, World!</p>"
+db = client['PortMgmt']
+
 
 @app.route("/test", methods=['POST'])
 def test():

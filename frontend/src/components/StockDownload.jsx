@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/StockDownload.css';
-import SendRequest from '../requestWrapper'; 
 
 function StockTickerInput() {
   const [tickerInputValue, setTickerInputValue, tickerStartDateValue, tickerEndDateValue ] = useState('');
 
   const handleDownloadStockClick = () => {
-    const payload = {
-      tickerInputValue,
-      tickerStartDateValue,
-      tickerEndDateValue
-    }
     
   };
 
