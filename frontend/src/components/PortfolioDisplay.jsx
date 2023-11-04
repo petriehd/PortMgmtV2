@@ -6,8 +6,7 @@ function PortfolioDisplay() {
   return (
     <>
       <p className="portfolio-display-header">Current Asset</p>
-      <li>Test</li>
-      <li>Test2</li>
+      <li>Login to see portfolio</li>
     </>
   )
 }

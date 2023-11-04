@@ -7,9 +7,12 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "methods": ["GE
 
 # Need to change below
 client = MongoClient('mongodb+srv://jamesppetrie:ryGjbnNhJLbJ8CBf@portmgmttesting.bxlefpc.mongodb.net/')
-
 db = client['PortMgmt']
 
+@app.route("/login", methods=['GET'])
+def test():
+   
+   return 1
 
 @app.route("/test", methods=['POST'])
 def test():

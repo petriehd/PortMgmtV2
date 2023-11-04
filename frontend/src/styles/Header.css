@@ -1,20 +1,22 @@
-.grid-container-header {
-  display: grid;
-  grid-template-columns: 6fr, 1fr;
-  background-color: #5c5f66;
-  height: 55px;
+.container-header {
+  background-color: rgb(116, 114, 117);
 }
 
-.grid-item-header-banner {
-  grid-column: 1 / 2;
+.item-header-banner {
+  display: inline-block;
+  width:60%;
+  padding-left: 10px;
 }
 
-.grid-item-login-button {
-  grid-column: 2 / 3;
-  width: 65px;
-  height:45px;
-  height:min-content;
-  justify-self: center;
-  margin:10px 
+.item-login-button {
+  display: inline-block;
+  justify-self:right;
+
+}
+
+.item-logged-in-status {
+  display: inline-block;
+  padding-right: 10px;
+  width: 120px
 }
 
