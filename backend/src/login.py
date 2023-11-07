@@ -1,14 +1,20 @@
+import src.database as db
 
-# Temp 
-from pymongo import MongoClient
-
-client = MongoClient('mongodb+srv://jamesppetrie:ryGjbnNhJLbJ8CBf@portmgmttesting.bxlefpc.mongodb.net/')
-db = client['main']
-collectionName = db['users']
 
 def loginSubmitExecute(username, password):
   # Can do any string manipulation here
 
-  userObject = collectionName.find_one({'name': username})
-  print(userObject)
-  return userObject
+  userObject = db.queryDatabase('F', {'name': username})
+  if 'error' in userObject:
+    # Need return if server error occured
+    return {
+      'errorCode': 1,
+      'error': 'Username not found'
+    }
+  elif userObject['password'] != password:
+    return {
+      'errorCode': 2,
+      'error': 'Password is incorrect'   
+    }
+  else:
+    return userObject

@@ -15,6 +15,7 @@ function Login() {
     setPasswordInputValue(e.target.value)
   }
 
+  const [signinStatusValue, setSigninStatusValue] = useState('')
   const handleLoginButtonClick = () => {
 
     const url = domainUrl + 'login-submit'
@@ -33,8 +34,18 @@ function Login() {
     })
     .then(response => response.json())
     .then(data => {
-      // Handle the response data here
-      console.log('Data from backend:', data);
+      // These errors dont work atm
+      if ('error' in data) {
+        if (data['errorCode'] === 1) {
+          setSigninStatusValue('User not founds')
+        }
+        else if (data['errorCode'] === 2) {
+          setSigninStatusValue('Password incorrect')
+        }
+      }
+      else {
+        console.log('Signed in with user:', data);
+      }
     })
     .catch(error => {
       // Handle errors
@@ -63,8 +74,8 @@ function Login() {
               value={passwordInputValue}
               onChange={handlePasswordInputChange}
             />
-
             <button className="login-main-display-login-button" onClick={handleLoginButtonClick}>Login</button>
+            <p className="login-main-display-signin-status-text">{signinStatusValue}</p>
           </div>
       </div>
     </>
