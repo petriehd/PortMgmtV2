@@ -11,8 +11,8 @@
 - Receives http requests to endpoints, executes functions, saves result to server and then returns success or failure
 
 **Database**
-- Needs quick and easy update from backend
-- Default tables already setup for front-end to work off
+- Setup using MongoDB
+- All usernames implemented as lowercase
 
 ## Setup:
 **Server:**
