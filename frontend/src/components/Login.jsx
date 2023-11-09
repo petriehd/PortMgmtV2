@@ -44,7 +44,7 @@ function Login() {
         }
       }
       else {
-        console.log('Signed in with user:', data);
+        // need to add link to new page here
       }
     })
     .catch(error => {
