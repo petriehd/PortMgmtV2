@@ -11,17 +11,6 @@
   height: 200px;
 }
 
-
-.grid-item-ticker-input {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-}
-
-.grid-item-portfolio-display {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-}
-
 .navbar {
   background: linear-gradient(to bottom, #f5b52b, #f0e7b8);
   height: 125;
@@ -29,8 +18,14 @@
   border-radius: 10px;
 }
 
+.grid-container-portfolio-builder {
+  display: grid;
+  grid-template-columns: 5%, 1fr, 50%;
+  grid-gap:10px;
+  align-items: center;
+}
 
-.portfolio-display-header {
+.grid-item-portfolio-display-header {
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 20px;
   letter-spacing: 2px;
@@ -42,4 +37,19 @@
   font-variant: normal;
   text-transform: none;
 
+  grid-column: 3/4;
+  grid-row:1/2;
+
 }
+
+.grid-item-download-button {
+  grid-column: 1/3;
+  max-width: 120px;
+  max-height: 75px;
+}
+
+.grid-item-portfolio-display {
+  grid-row:2/3;
+}
+
+

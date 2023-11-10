@@ -29,7 +29,7 @@ function PortfolioDisplay() {
   return (
     <>
       <p className="portfolio-display-header">Current Assets for user {userId}</p>
-      <li>{portfolioObject}</li>
+      <li >{portfolioObject}</li>
     </>
   )
 }

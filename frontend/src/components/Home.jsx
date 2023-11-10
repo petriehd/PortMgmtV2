@@ -1,6 +1,5 @@
 import Navbar from "./Navbar";
-import StockTickerInput from "./StockDownload";
-import PortfolioDisplay from "./PortfolioDisplay";
+import PortfolioBuilder from "./PortfolioBuilder";
 import '../styles/Home.css'
 
 function Home() {
@@ -8,8 +7,7 @@ function Home() {
     <>
       <div className="navbar"><Navbar /></div>
       <div className="grid-container">
-        <div className="grid-item-ticker-input"><StockTickerInput /></div>
-        <div className="grid-item-portfolio-display"><PortfolioDisplay /></div>
+        <div><PortfolioBuilder /></div>
       </div>
     </>
   )
