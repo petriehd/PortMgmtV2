@@ -2,6 +2,8 @@ import '../styles/PortfolioDisplay.css'
 
 function PortfolioDisplay() {
   
+  
+
 
   return (
     <>

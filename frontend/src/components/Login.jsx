@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import '../styles/Login.css'
 
 const domainUrl = 'http://127.0.0.1:5000/'
 
 function Login() {
+  let navigate = useNavigate();
+
   const [usernameInputValue, setUsernameInputValue] = useState('')
   const handleUsernameInputChange = (e) => {
     setUsernameInputValue(e.target.value)
@@ -38,13 +41,15 @@ function Login() {
       if ('error' in data) {
         if (data['errorCode'] === 1) {
           setSigninStatusValue('User not founds')
+          console.log('tests')
         }
         else if (data['errorCode'] === 2) {
           setSigninStatusValue('Password incorrect')
         }
       }
       else {
-        // need to add link to new page here
+        navigate('/home')
+        console.log('tests')
       }
     })
     .catch(error => {
