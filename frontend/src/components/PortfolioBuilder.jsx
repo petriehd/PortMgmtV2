@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useUserId } from '../context/userContext';
-import Axios from 'axios' 
+import { GetRequest } from '../requestWrapper';
 
 import '../styles/Home.css';
-
-// Can get rid of once requestWrappers are created
-const domainUrl = 'http://127.0.0.1:5000/'
 
 const Portfoliobuilder = () => {
   const userId = useUserId();
@@ -14,20 +11,11 @@ const Portfoliobuilder = () => {
   const [ tickerStartRangeValue, setTickerStartRangeValue ] = useState('')
   const [ tickerEndRangeValue, setTickerEndRangeValue ] = useState('')
 
-  useEffect(() => {
-    Axios.get(domainUrl + `get-portfolio/${1}`)
-    .then(function (response) {
-      console.log(response)
 
-      // This causes useEffect to rerender twice
-      setPortfolioObject(response.data.name)
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-    .finally(function () {
-      
-    })
+  useEffect(() => {
+    const Portfolio = GetRequest( `/get-portfolio/${1}`, null)
+    console.log(Portfolio)
+    setPortfolioObject()
   }, [])
 
   const handleDownloadStockClick = () => {
