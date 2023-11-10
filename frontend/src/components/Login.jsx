@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUpdateUserId } from "../context/userContext";
 
 import '../styles/Login.css'
 
@@ -7,6 +8,8 @@ const domainUrl = 'http://127.0.0.1:5000/'
 
 function Login() {
   let navigate = useNavigate();
+
+  const updateUserId = useUpdateUserId();
 
   const [usernameInputValue, setUsernameInputValue] = useState('')
   const handleUsernameInputChange = (e) => {
@@ -47,12 +50,13 @@ function Login() {
         }
       }
       else {
+        updateUserId(data.userId)
         navigate('/home')
-        console.log('tests')
+        console.log(data)
       }
     })
     .catch(error => {
-      // Handle errors
+      
       console.error('Error:', error);
     });
   }
