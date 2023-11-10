@@ -1,5 +1,6 @@
 * {
   padding: 2px;
+  border-radius: 5px;
 }
 
 .grid-container {
@@ -26,4 +27,19 @@
   height: 125;
   margin-bottom: 15px;
   border-radius: 10px;
+}
+
+
+.portfolio-display-header {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: #a39090;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+
 }

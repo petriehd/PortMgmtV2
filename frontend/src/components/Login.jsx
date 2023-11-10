@@ -41,7 +41,6 @@ function Login() {
       if ('error' in data) {
         if (data['errorCode'] === 1) {
           setSigninStatusValue('User not founds')
-          console.log('tests')
         }
         else if (data['errorCode'] === 2) {
           setSigninStatusValue('Password incorrect')

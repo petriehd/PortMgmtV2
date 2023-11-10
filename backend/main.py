@@ -20,13 +20,14 @@ def loginSubmit():
 
   return jsonify(status)
 
-
-@app.route("/test", methods=['POST'])
-def test():
-
+@app.route("/get-portfolio/<id>", methods=['GET'])
+def getUserPortfolio(id):
+   
   data = {
-     test: 'sup'
+     'ticker': 'MQG',
+     'name': 'Macquarie'
   }
+
   return jsonify(data)
 
 
