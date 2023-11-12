@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useUserId } from '../context/userContext';
 import { GetRequest } from '../requestWrapper';
+import Axios from 'axios'
 
 import '../styles/Home.css';
+
+const SERVER = "http://127.0.0.1:5000"
+
+
 
 const Portfoliobuilder = () => {
   const userId = useUserId();
@@ -13,9 +18,17 @@ const Portfoliobuilder = () => {
 
 
   useEffect(() => {
-    const Portfolio = GetRequest( `/get-portfolio/${1}`, null)
-    console.log(Portfolio)
-    setPortfolioObject()
+    (async () => {
+      let data
+      try {
+        data = await Axios.get(SERVER + `/get-portfolio/${1}`)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        // Will need to update to include all 
+        setPortfolioObject(data.data.name)
+      }   
+    })();
   }, [])
 
   const handleDownloadStockClick = () => {
