@@ -1,10 +1,12 @@
 from pymongo import MongoClient
+import json
 
 client = MongoClient('mongodb+srv://jamesppetrie:ryGjbnNhJLbJ8CBf@portmgmttesting.bxlefpc.mongodb.net/')
-db = client['main']
+db = client.main
 collectionName = db['users']
 
-def queryDatabase(type, query):
+def queryDatabase(collection, type, query):
+  # Needs to be rewritten
   try:
     if type == 'F':
       user = collectionName.find_one(query)
@@ -15,3 +17,10 @@ def queryDatabase(type, query):
     
   except:
     return {'error': 'server issue'}
+  
+def writeDatabase(collection, type, query):
+  # type used for options
+  coll = db[collection]
+  coll.insert_one(json.dumps(query))
+
+  return

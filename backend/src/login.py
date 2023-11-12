@@ -9,17 +9,5 @@ def loginSubmitExecute(username, password):
     'username': username
   }
   return userObject
-  # userObject = db.queryDatabase('F', {'name': username})
-  # if 'error' in userObject:
-  #   # Need return if server error occured
-  #   return {
-  #     'errorCode': 1,
-  #     'error': 'Username not found'
-  #   }
-  # elif userObject['password'] != password:
-  #   return {
-  #     'errorCode': 2,
-  #     'error': 'Password is incorrect'   
-  #   }
-  # else:
+
   
