@@ -23,8 +23,11 @@ const Portfoliobuilder = () => {
       } catch (error) {
         console.log(error)
       } finally {
-        // Will need to update to include all 
-        setPortfolioObject(data.data.name)
+
+        // Gets data just needs to update so includes everything else
+        let tempPortfolioAssets = portfolioAssets;
+        tempPortfolioAssets.push(data.data.name);
+        setPortfolioAssets(tempPortfolioAssets)
       }   
     })();
   }, [])
