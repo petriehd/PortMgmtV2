@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useUserId } from '../context/userContext';
 import Axios from 'axios'
+
+import { useUserId } from '../context/userContext';
+import useGetPortfolio from '../states/useGetPortfolio';
 
 import '../styles/Home.css';
 
@@ -8,30 +10,12 @@ const SERVER = "http://127.0.0.1:5000"
 
 const Portfoliobuilder = () => {
   const userId = useUserId();
+  const [ portfolioAssets ] = useGetPortfolio(2)
   const [ tickerInputValue, setTickerInputValue ] = useState('')
   const [ tickerStartRangeValue, setTickerStartRangeValue ] = useState('')
   const [ tickerEndRangeValue, setTickerEndRangeValue ] = useState('')
-  const [ portfolioAssets, setPortfolioAssets ] = useState([])
 
-
-  useEffect(() => {
-    (async () => {
-      let data
-      try {
-        data = await Axios.get(SERVER + `/get-portfolio/${2}`)
-      } catch (error) {
-        console.log(error)
-      } finally {
-
-        const assets = data.data.assets
-        const assetNames = []
-        for (let i = 0; i < assets.length; i++) {
-          assetNames.push(assets[i].name);
-        }
-        setPortfolioAssets(assetNames)
-      }   
-    })();
-  }, [])
+  
 
   const handleDownloadStockClick = () => {
     const payload = {
@@ -45,7 +29,6 @@ const Portfoliobuilder = () => {
     } catch (error) {
       console.log(error)
     } finally {
-
     }
 
 
