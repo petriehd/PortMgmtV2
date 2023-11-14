@@ -19,15 +19,17 @@ const Portfoliobuilder = () => {
     (async () => {
       let data
       try {
-        data = await Axios.get(SERVER + `/get-portfolio/${1}`)
+        data = await Axios.get(SERVER + `/get-portfolio/${2}`)
       } catch (error) {
         console.log(error)
       } finally {
 
-        // Gets data just needs to update so includes everything else
-        let tempPortfolioAssets = portfolioAssets;
-        tempPortfolioAssets.push(data.data.name);
-        setPortfolioAssets(tempPortfolioAssets)
+        const assets = data.data.assets
+        const assetNames = []
+        for (let i = 0; i < assets.length; i++) {
+          assetNames.push(assets[i].name);
+        }
+        setPortfolioAssets(assetNames)
       }   
     })();
   }, [])
