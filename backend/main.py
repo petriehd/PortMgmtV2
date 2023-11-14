@@ -19,12 +19,22 @@ def loginSubmit():
   return jsonify(status)
 
 
-@app.route("/get-portfolio/<id>", methods=['GET'])
-def getUserPortfolio(id):
+@app.route("/get-portfolio/<userId>", methods=['GET'])
+def getUserPortfolio(userId):
   
-  data = port.getUserPortfolio(id)
+  data = port.getUserPortfolio(userId)
   
   return jsonify(data)
+
+
+@app.route("/add-stock/<userId>", methods=['POST'])
+def addStockToPortfolio(userId):
+   data = request.get_json()
+   print(data)
+  
+   port.addStockToPortfolio(userId, data['tick'], data['startDate'], data['endDate'])
+
+   return jsonify(data)
 
  
 
