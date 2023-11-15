@@ -10,6 +10,7 @@ const SERVER = "http://127.0.0.1:5000"
 
 const Portfoliobuilder = () => {
   const userId = useUserId();
+  // need to update below to use correct userId
   const [ portfolioAssets ] = useGetPortfolio(2)
   const [ tickerInputValue, setTickerInputValue ] = useState('')
   const [ tickerStartRangeValue, setTickerStartRangeValue ] = useState('')
