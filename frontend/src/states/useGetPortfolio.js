@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { requestWrapperGet } from '../requestWrapper'
+import { SERVER } from '../config'
 import Axios from 'axios'
 
-const SERVER = "http://127.0.0.1:5000"
 
 const useGetPortfolio = (userId) => {
   const [ portfolioList, setPortfolioList ] = useState([])

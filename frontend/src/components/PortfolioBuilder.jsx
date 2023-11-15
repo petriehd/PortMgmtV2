@@ -3,10 +3,11 @@ import Axios from 'axios'
 
 import { useUserId } from '../context/userContext';
 import useGetPortfolio from '../states/useGetPortfolio';
+import { CheckDatesValid } from '../logic/portfolioBuilder';
+import { SERVER } from '../config'
 
 import '../styles/Home.css';
 
-const SERVER = "http://127.0.0.1:5000"
 
 const Portfoliobuilder = () => {
   const userId = useUserId();
@@ -19,25 +20,19 @@ const Portfoliobuilder = () => {
   
 
   const handleDownloadStockClick = () => {
+
+    
+  if (!CheckDatesValid(tickerStartRangeValue, tickerEndRangeValue)) { /* Need to output something if false */ return}
+
     const payload = {
       'tick': tickerInputValue,
       'startDate': tickerStartRangeValue,
       'endDate': tickerEndRangeValue
     }
-    let data
-    try {
-      data = Axios.post(SERVER + `/add-stock/${2}`, payload)
-    } catch (error) {
-      console.log(error)
-    } finally {
-    }
+    Axios.post(SERVER + `/add-stock/${2}`, payload)
+    .then((res) => {
 
-
-    // Will do all below after stock successfully downloaded
-    // let tempPortfolioAssets = portfolioAssets;
-    // tempPortfolioAssets.push(tickerInputValue);
-    // setPortfolioAssets(tempPortfolioAssets)
-    // setTickerInputValue('')
+    })
   };
 
   return (
