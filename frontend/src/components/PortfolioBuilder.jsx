@@ -64,7 +64,7 @@ const Portfoliobuilder = () => {
         />
         <button className='grid-item-download-button' onClick={handleDownloadStockClick} >Download</button>
         <p className="grid-item-portfolio-display-header">Current Assets for user {userId}</p>
-        <ul style={{gridRow:'1/5', gridColumn:'3/4'}}> {portfolioAssets.length > 0 && portfolioAssets.map((item) => <li>{item}</li>)} </ul>
+        <ul className='grid-item-portfolio-display-list'> {portfolioAssets.length > 0 && portfolioAssets.map((item) => <li>{item}</li>)} </ul>
       </div>
     </>
   )

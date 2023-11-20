@@ -48,8 +48,10 @@
   max-height: 75px;
 }
 
-.grid-item-portfolio-display {
-  grid-row:2/3;
+.grid-item-portfolio-display-list {
+  grid-row: 1/5;
+  grid-column: 3/4;
+  padding: 15px;
 }
 
 
