@@ -51,7 +51,7 @@ function Login() {
       } else if (err.response?.status === 400) {
         setErrMsg('Missing username or password')
       } else if (err.response?.status === 401) {
-        setErrMsg('Unathorized')
+        setErrMsg('Username or password is incorrect')
       } else {
         setErrMsg('Login failed')
       }
@@ -64,7 +64,6 @@ function Login() {
     <>
       <div style={{background: '#ececd9', minHeight: '100vh'}}>
         <div className="main-display">
-          <p ref={errRef} className={errMsg ? "error-message" : "offscreen"} aria-live="assertive">{errMsg}</p>
           <form onSubmit={handleLoginSubmit}>
             <label htmlFor="userName">Username:</label>
             <input 
@@ -92,6 +91,7 @@ function Login() {
                 <a href="#">Sign up</a>
               </span>
             </p>
+            <p ref={errRef} className={errMsg ? "error-message" : "offscreen"} aria-live="assertive">{errMsg}</p>
           </form>
         </div>
       </div>
