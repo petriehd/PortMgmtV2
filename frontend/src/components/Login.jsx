@@ -41,7 +41,6 @@ function Login() {
           withCredentials: true
         }
       );
-      console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       setAuth({ userName, userPassword, accessToken })
       setUserName('');
@@ -51,7 +50,7 @@ function Login() {
         setErrMsg('No server response');
       } else if (err.response?.status === 400) {
         setErrMsg('Missing username or password')
-      } else if (err.response?.state === 401) {
+      } else if (err.response?.status === 401) {
         setErrMsg('Unathorized')
       } else {
         setErrMsg('Login failed')

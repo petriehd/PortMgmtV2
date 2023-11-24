@@ -11,12 +11,12 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "methods": ["GE
 
 @app.route("/login-submit", methods=['POST'])
 def loginSubmit():
-  # Check data is clean
   data = request.get_json()
+  status = login.loginSubmitExecute(data['user'], data['password'])
+  if ('error' in status):
+    return status, 401
 
-  status = login.loginSubmitExecute(data['usernameInput'], data['passwordInput'])
-
-  return jsonify(status)
+  return status, 200
 
 
 @app.route("/get-portfolio/<userId>", methods=['GET'])

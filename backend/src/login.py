@@ -3,12 +3,8 @@ import config as cfg
 def loginSubmitExecute(username, password):
   coll = cfg.DB['users']
   data = coll.find_one({'username': username})
-  print(data)
+  if (password != data['password']): return { 'error': 'password does not match'}
 
-  userObject = {
-    'userId': 1,
-    'username': username
-  }
-  return userObject
+  return data
 
   
