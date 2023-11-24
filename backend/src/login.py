@@ -1,8 +1,9 @@
-import src.database as db
-
+import config as cfg
 
 def loginSubmitExecute(username, password):
-  # Can do any string manipulation here
+  coll = cfg.DB['users']
+  data = coll.find_one({'username': username})
+  print(data)
 
   userObject = {
     'userId': 1,

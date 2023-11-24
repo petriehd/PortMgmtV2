@@ -2,7 +2,6 @@ import config as cfg
 import yfinance as yf
 import pandas as pd
 
-
 def isValidTicker(ticker):
   # Doesnt work
   try:

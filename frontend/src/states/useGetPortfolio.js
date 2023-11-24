@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { requestWrapperGet } from '../requestWrapper'
+import { requestWrapperGet } from '../axios'
 import { SERVER } from '../config'
 import Axios from 'axios'
 

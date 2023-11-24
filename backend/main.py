@@ -6,7 +6,7 @@ import src.login as login
 import src.portfolio as port
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "methods": ["GET", "POST", "PUT", "DELETE"]}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "methods": ["GET", "POST", "PUT", "DELETE"]}}, supports_credentials=True)
 
 
 @app.route("/login-submit", methods=['POST'])

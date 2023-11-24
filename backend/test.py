@@ -6,6 +6,6 @@ db = client["main"]
 collection = db["portfolios"]
 
 test = yf.Ticker('MSFT')
-test.info
+print(test.fast_info)
 
 
