@@ -13,9 +13,7 @@ import '../styles/Home.css';
 
 const Portfoliobuilder = () => {
   const { auth } = useContext(AuthContext)
-  console.log(auth)
   const userId = useUserId();
-  // need to update below to use correct userId
   const [ portfolioAssets ] = useGetPortfolio(auth.userId)
   const [ tickerInputValue, setTickerInputValue ] = useState('')
   const [ tickerStartRangeValue, setTickerStartRangeValue ] = useState('')
