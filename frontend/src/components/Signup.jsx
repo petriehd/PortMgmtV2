@@ -15,6 +15,7 @@ function Signup() {
   const [ lastName, setLastName ] = useState('')
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+  const [ confirmPassword, setConfirmPassword ] = useState('')
   const [ errMsg, setErrMsg ] = useState('')
   const [ success, SetSuccess ] = useState(false)
 
@@ -30,6 +31,12 @@ function Signup() {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setErrMsg('Passwords do not match')
+      errRef.current.focus();
+      return;
+    }
 
     try {
       const response = await axios.post(SIGNUP_URL,
@@ -99,12 +106,21 @@ function Signup() {
               value={password}
               required
             />
+            <label htmlFor="confirmPassword">Confirm password: </label>
+            <input 
+              type="password" 
+              id="confirmPassword"
+              autoComplete="off"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={confirmPassword}
+              required
+            />
             <button>Submit</button>
           </form>
           <p>
             Already have an account? <br />
             <span className="line">
-              <a href="/login">Login</a>
+              <a href="/">Login</a>
             </span>
           </p>
         </div>
