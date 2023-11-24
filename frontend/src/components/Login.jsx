@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useUpdateUserId } from "../context/userContext";
 import AuthContext from "../context/authProvider";
 import axios from '../axios';
 
@@ -10,7 +9,7 @@ import '../styles/Login.css'
 const LOGIN_URL = '/login-submit'
 
 function Login() {
-  const { auth, setAuth } = useContext(AuthContext)
+  const { setAuth } = useContext(AuthContext)
   const userRef = useRef();
   const errRef = useRef();
 
@@ -19,8 +18,6 @@ function Login() {
   const [ errMsg, setErrMsg ] = useState('')
 
   let navigate = useNavigate();
-
-  const updateUserId = useUpdateUserId();
 
   useEffect(() => {
     userRef.current.focus();
@@ -64,7 +61,7 @@ function Login() {
     <>
       <div style={{background: '#ececd9', minHeight: '100vh'}}>
         <div className="main-display">
-          <form onSubmit={handleLoginSubmit}>
+          <form className="input-form" onSubmit={handleLoginSubmit}>
             <label htmlFor="userName">Username:</label>
             <input 
               type="text" 
@@ -87,8 +84,7 @@ function Login() {
             <p>
               Haven't got an account? <br />
               <span className="line">
-                { /* Router link here */ }
-                <a href="#">Sign up</a>
+                <a href="/signup">Sign up</a>
               </span>
             </p>
             <p ref={errRef} className={errMsg ? "error-message" : "offscreen"} aria-live="assertive">{errMsg}</p>
