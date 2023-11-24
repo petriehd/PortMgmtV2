@@ -9,16 +9,13 @@ function App() {
   return (
     <>
     <Router>
-      <UserProvider value={null}>
-        <Routes>
-          <Route exact path='/' element={<Login />}>   
-          </Route>
+      <Routes>
+        <Route exact path='/' element={<Login />}>   
+        </Route>
             
-          <Route exact path="/home" element={ <Home />}>     
-          </Route>
-
-        </Routes>
-      </UserProvider>
+        <Route exact path="/home" element={ <Home />}>     
+        </Route>
+      </Routes>
     </Router>
     </>
   )

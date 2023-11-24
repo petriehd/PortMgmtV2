@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios'
 
 import { useUserId } from '../context/userContext';
 import useGetPortfolio from '../states/useGetPortfolio';
 import { CheckDatesValid } from '../logic/portfolioBuilder';
+import AuthContext from '../context/authProvider';
+
 import { SERVER } from '../config'
 
 import '../styles/Home.css';
 
 
 const Portfoliobuilder = () => {
+  const { auth } = useContext(AuthContext)
+  console.log(auth)
   const userId = useUserId();
   // need to update below to use correct userId
-  const [ portfolioAssets ] = useGetPortfolio(2)
+  const [ portfolioAssets ] = useGetPortfolio(auth.userId)
   const [ tickerInputValue, setTickerInputValue ] = useState('')
   const [ tickerStartRangeValue, setTickerStartRangeValue ] = useState('')
   const [ tickerEndRangeValue, setTickerEndRangeValue ] = useState('')

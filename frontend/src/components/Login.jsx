@@ -10,7 +10,7 @@ import '../styles/Login.css'
 const LOGIN_URL = '/login-submit'
 
 function Login() {
-  const { setAuth } = useContext(AuthContext)
+  const { auth, setAuth } = useContext(AuthContext)
   const userRef = useRef();
   const errRef = useRef();
 
@@ -42,9 +42,9 @@ function Login() {
         }
       );
       const accessToken = response?.data?.accessToken;
-      setAuth({ userName, userPassword, accessToken })
-      setUserName('');
-      setUserPassword('');
+      const userId = response?.data?._id
+      setAuth({ userId, userPassword, accessToken })
+      navigate('/home')
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No server response');
@@ -97,33 +97,6 @@ function Login() {
       </div>
     </>
   )
-
-  // Can break off all display into its own component
-  // return (
-  //   <>
-  //     <div className="background">
-  //         <div className="login-main-display">
-  //           <p className="login-main-display-header"> Welcome to _____________</p>
-  //           <p className="login-main-display-user-text"> Username:</p>
-  //           <input className="login-main-display-user-input" 
-  //             type="text"
-  //             id="usernameInput"
-  //             value={usernameInputValue}
-  //             onChange={handleUsernameInputChange}
-  //           />
-  //           <p className="login-main-display-pass-text"> Password:</p>
-  //           <input className="login-main-display-pass-input" 
-  //             type="text"
-  //             id="usernameInput"
-  //             value={passwordInputValue}
-  //             onChange={handlePasswordInputChange}
-  //           />
-  //           <button className="login-main-display-login-button" onClick={handleLoginButtonClick}>Login</button>
-  //           <p className="login-main-display-signin-status-text">{signinStatusValue}</p>
-  //         </div>
-  //     </div>
-  //   </>
-  // )
 }
 
 export default Login
