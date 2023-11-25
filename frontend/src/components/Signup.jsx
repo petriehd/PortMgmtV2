@@ -27,7 +27,7 @@ function Signup() {
 
   useEffect(() => {
     setErrMsg('')
-  }, [firstName, lastName, email, password])
+  }, [firstName, lastName, email, password, confirmPassword])
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
@@ -53,10 +53,11 @@ function Signup() {
       );
       SetSuccess(true)
     } catch (err) {
+      console.log(err)
       if (!err?.response) {
         setErrMsg('No server response')
       } else if (err.response?.status === 400) {
-        setErrMsg('Missing input')
+        setErrMsg(err.response?.data?.error)
       } else {
         setErrMsg('Signup failed. Please try again')
       }
@@ -116,13 +117,14 @@ function Signup() {
               required
             />
             <button>Submit</button>
-          </form>
-          <p>
+            <p>
             Already have an account? <br />
             <span className="line">
               <a href="/">Login</a>
             </span>
           </p>
+          <p ref={errRef} className={errMsg ? "error-message" : "offscreen"} aria-live="assertive">{errMsg}</p>
+          </form>
         </div>
       </div>
     </>
