@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useUpdateUserId } from "../context/userContext";
 import AuthContext from "../context/authProvider";
 import axios from '../axios';
 
@@ -10,17 +9,15 @@ import '../styles/Login.css'
 const LOGIN_URL = '/login-submit'
 
 function Login() {
-  const { auth, setAuth } = useContext(AuthContext)
+  const { setAuth } = useContext(AuthContext)
   const userRef = useRef();
   const errRef = useRef();
 
-  const [ userName, setUserName] = useState('')
+  const [ userEmail, setUserEmail] = useState('')
   const [ userPassword, setUserPassword ] = useState('')
   const [ errMsg, setErrMsg ] = useState('')
 
   let navigate = useNavigate();
-
-  const updateUserId = useUpdateUserId();
 
   useEffect(() => {
     userRef.current.focus();
@@ -28,14 +25,14 @@ function Login() {
 
   useEffect(() => {
     setErrMsg('');
-  }, [userName, userPassword])
+  }, [userEmail, userPassword])
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(LOGIN_URL, 
-        JSON.stringify({ user: userName, password: userPassword }),
+        JSON.stringify({ email: userEmail, password: userPassword }),
         {
           headers: { 'Content-Type': 'application/json'},
           withCredentials: true
@@ -49,9 +46,9 @@ function Login() {
       if (!err?.response) {
         setErrMsg('No server response');
       } else if (err.response?.status === 400) {
-        setErrMsg('Missing username or password')
+        setErrMsg('Missing email or password')
       } else if (err.response?.status === 401) {
-        setErrMsg('Username or password is incorrect')
+        setErrMsg('Email or password is incorrect')
       } else {
         setErrMsg('Login failed')
       }
@@ -64,15 +61,15 @@ function Login() {
     <>
       <div style={{background: '#ececd9', minHeight: '100vh'}}>
         <div className="main-display">
-          <form onSubmit={handleLoginSubmit}>
-            <label htmlFor="userName">Username:</label>
+          <form className="input-form" onSubmit={handleLoginSubmit}>
+            <label htmlFor="userEmail">Email:</label>
             <input 
               type="text" 
-              id="username"
+              id="userEmail"
               ref={userRef}
               autoComplete="off"
-              onChange={(e) => setUserName(e.target.value)}
-              value={userName}
+              onChange={(e) => setUserEmail(e.target.value)}
+              value={userEmail}
               required
             />
             <label htmlFor="password">Password:</label>
@@ -87,8 +84,7 @@ function Login() {
             <p>
               Haven't got an account? <br />
               <span className="line">
-                { /* Router link here */ }
-                <a href="#">Sign up</a>
+                <a href="/signup">Sign up</a>
               </span>
             </p>
             <p ref={errRef} className={errMsg ? "error-message" : "offscreen"} aria-live="assertive">{errMsg}</p>
