@@ -61,7 +61,6 @@ function Navbar() {
             <Link to='/options' className='nav-links' onClick={closeMobileMenu}>
               Options <i className='fas fa-caret-down'/>
             </Link>
-            {optionMenuActive && <Dropdown />}
           </li>               
         </ul>
       </nav>

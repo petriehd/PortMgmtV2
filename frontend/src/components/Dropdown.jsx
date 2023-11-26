@@ -14,15 +14,9 @@ function Dropdown() {
     <>
       <ul
         onClick={handleClick}
-        className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}
+        className={click ? 'dropdown-menu clicked' : 'dropdown-menu clicked'}
       >
-        <li>
-          <h1>Testo</h1>
-        </li>
-        <li>
-          <h1>testing</h1>
-        </li>
-        {/* {MenuItems.map((item, index) => {
+        {MenuItems.map((item, index) => {
           return (
             <li key={index}>
               <Link
@@ -34,7 +28,7 @@ function Dropdown() {
               </Link>
             </li>
           );
-        })} */}
+        })}
       </ul>
     </>
   );
