@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { MenuItems } from './MenuItems'
+import { PortfolioMenuItems } from './MenuItems'
 
 import '../styles/Home.css'
 
-function Dropdown() {
+function PortfolioDropdown() {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
@@ -16,7 +16,7 @@ function Dropdown() {
         onClick={handleClick}
         className={click ? 'dropdown-menu clicked' : 'dropdown-menu clicked'}
       >
-        {MenuItems.map((item, index) => {
+        {PortfolioMenuItems.map((item, index) => {
           return (
             <li key={index}>
               <Link
@@ -34,4 +34,4 @@ function Dropdown() {
   );
 }
 
-export default Dropdown
+export default PortfolioDropdown

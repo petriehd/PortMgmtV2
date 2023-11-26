@@ -2,33 +2,34 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from './Button'
-import Dropdown from './Dropdown'
+import PortfolioDropdown from './PortfolioDropdown'
+import OptionDropdown from './OptionDropdown'
 
 import '../styles/Home.css'
 
 function Navbar() {
   const [ menuClicked, setMenuClicked ] = useState(false)
-  const [ dropdown, setDropdown ] = useState(false)
+  const [ portDropdown, setPortDropdown ] = useState(false)
+  const [ optDropdown, setOptDropdown ] = useState(false)
+  /* Unsure if below is needed */
   const [ portfolioMenuActive, setportfolioMenuActive ] = useState(false)
   const [ optionMenuActive, setOptionMenuActive ] = useState(false)
 
   const handleMenuClick = () => setMenuClicked(!menuClicked)
   const closeMobileMenu = () => setMenuClicked(false);
 
-  const onMouseEnter = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(true);
-    }
+  const onMouseEnterPort = () => {
+    window.innerWidth < 960 ? setPortDropdown(false) : setPortDropdown(true)
+  };
+  const onMouseLeavePort = () => {
+    window.innerWidth < 960 ? setPortDropdown(false) : setPortDropdown(false)
   };
 
-  const onMouseLeave = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(false);
-    }
+  const onMouseEnterOpt = () => {
+    window.innerWidth < 960 ? setOptDropdown(false) : setOptDropdown(true)
+  };
+  const onMouseLeaveOpt = () => {
+    window.innerWidth < 960 ? setOptDropdown(false) : setOptDropdown(false)
   };
 
   return (
@@ -45,8 +46,8 @@ function Navbar() {
             </Link>
           </li>
           <li className='nav-item' 
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
+              onMouseEnter={onMouseEnterPort}
+              onMouseLeave={onMouseLeavePort}
           >
             <Link 
               to='/portfolio' 
@@ -55,12 +56,20 @@ function Navbar() {
             >
               Portfolios <i className='fas fa-caret-down'/>
             </Link>
-            {dropdown && <Dropdown />}
+            {portDropdown && <PortfolioDropdown />}
           </li>   
-          <li className='nav-item' >
-            <Link to='/options' className='nav-links' onClick={closeMobileMenu}>
+          <li className='nav-item' 
+              onMouseEnter={onMouseEnterOpt}
+              onMouseLeave={onMouseLeaveOpt}
+          >
+            <Link 
+              to='/options' 
+              className='nav-links' 
+              onClick={closeMobileMenu}
+            >
               Options <i className='fas fa-caret-down'/>
             </Link>
+            {optDropdown && <OptionDropdown />}
           </li>               
         </ul>
       </nav>
