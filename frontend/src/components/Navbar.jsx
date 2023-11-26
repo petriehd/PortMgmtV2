@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Button } from './Button'
-import PortfolioDropdown from './PortfolioDropdown'
-import OptionDropdown from './OptionDropdown'
+import PortfolioDropdown from './navbar/PortfolioDropdown'
+import OptionDropdown from './navbar/OptionDropdown'
 
 import '../styles/Home.css'
 

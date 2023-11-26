@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { PortfolioMenuItems } from './MenuItems'
 
-import '../styles/Home.css'
+import '../../styles/Home.css'
 
 function PortfolioDropdown() {
   const [click, setClick] = useState(false);
