@@ -5,7 +5,7 @@ import '../styles/Home.css'
 function Home() {
   return (
     <>
-      <div className="navbar"><Navbar /></div>
+      <div><Navbar /></div>
       <div className="grid-container">
         <div><PortfolioBuilder /></div>
       </div>
