@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { OptionMenuItems } from './MenuItems'
 
-import '../../styles/Home.css'
+import '../../styles/Navbar.css'
 
 function OptionDropdown() {
   const [click, setClick] = useState(false);

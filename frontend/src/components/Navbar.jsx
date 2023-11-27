@@ -4,15 +4,12 @@ import { Link } from 'react-router-dom'
 import PortfolioDropdown from './navbar/PortfolioDropdown'
 import OptionDropdown from './navbar/OptionDropdown'
 
-import '../styles/Home.css'
+import '../styles/Navbar.css'
 
 function Navbar() {
   const [ menuClicked, setMenuClicked ] = useState(false)
   const [ portDropdown, setPortDropdown ] = useState(false)
   const [ optDropdown, setOptDropdown ] = useState(false)
-  /* Unsure if below is needed */
-  const [ portfolioMenuActive, setportfolioMenuActive ] = useState(false)
-  const [ optionMenuActive, setOptionMenuActive ] = useState(false)
 
   const handleMenuClick = () => setMenuClicked(!menuClicked)
   const closeMobileMenu = () => setMenuClicked(false);
@@ -34,7 +31,10 @@ function Navbar() {
   return (
     <>
       <nav className='navbar'>
-        <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>Test</Link>
+        <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+        <i class="fa-solid fa-chart-pie fa-l" style={{"color": "#e9ecf1"}}/>
+          Qu 
+        </Link>
         <div className='menu-icon' onClick={handleMenuClick}>
           <i className={menuClicked ? 'fas fa-times' : 'fas fa-bars'} />
         </div>
