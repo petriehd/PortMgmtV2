@@ -5,13 +5,15 @@ import AuthContext from '../context/authProvider'
 import useGetPortfolio from '../states/useGetPortfolio'
 import { CheckDatesValid } from '../logic/portfolioBuilder'
 
-import '../styles/portfolios.css'
+import Navbar from './Navbar'
+
+import '../styles/Portfolios.css'
 
 const DOWNLOAD_URL = '/download-stock'
 
 const PortfolioLive = () => {
   const { auth } = useContext(AuthContext)
-  const [ currentPortfolio ] = useGetPortfolio(auth.userId)
+  //const [ currentPortfolio ] = useGetPortfolio(auth.userId)
   const errRef = useRef();
 
   const [ tickInput, setTickInput ] = useState('')
@@ -49,6 +51,7 @@ const PortfolioLive = () => {
 
   return (
     <>
+      < Navbar />
       <div className='portfolio-live-main'>
         <form className='input-form' onSubmit={handleDownloadClick}>
           <label htmlFor='tickCode'>
@@ -96,3 +99,5 @@ const PortfolioLive = () => {
   )
 
 }
+
+export default PortfolioLive
