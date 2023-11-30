@@ -18,7 +18,6 @@ function App() {
         </Route>
             
         <Route exact path="/home" element={ <Home />}>    
-
         </Route>
 
         <Route exact path='/portfolio/create-live' element={ <PortfolioLive />}>

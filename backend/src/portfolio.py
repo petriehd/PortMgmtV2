@@ -11,7 +11,7 @@ def isValidTicker(ticker):
     return False  
 
 
-def getUserPortfolio(userId):
+def getPortfolio(userId):
   coll = cfg.DB['portfolios']
   data = coll.find_one({'userId': int(userId)})
 
@@ -23,7 +23,7 @@ def addStockToPortfolio(userId, ticker, startDate, endDate):
     return { 'returnCode': 1 }
   
   stockData = yf.download(ticker, start=startDate, end=endDate)
-  portfolio = getUserPortfolio(userId)
+  portfolio = getPortfolio(userId)
   newStockObject = {
     'name': 'Macquarie',
     'ticker': ticker,

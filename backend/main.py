@@ -34,12 +34,12 @@ def signupSubmit():
 @app.route("/get-portfolio/<userId>", methods=['GET'])
 def getUserPortfolio(userId):
   
-  data = port.getUserPortfolio(userId)
+  data = port.getPortfolio(userId)
   
   return jsonify(data)
 
 
-@app.route("/add-stock/<userId>", methods=['POST'])
+@app.route("/download-stock/<userId>", methods=['POST'])
 def addStockToPortfolio(userId):
    data = request.get_json()
    print(data)
