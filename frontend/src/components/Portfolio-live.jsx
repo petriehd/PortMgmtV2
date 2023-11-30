@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 
 import axios from '../axios'
 import AuthContext from '../context/authProvider'
-import useGetPortfolio from '../states/useGetPortfolio'
 import { CheckDatesValid } from '../logic/portfolioBuilder'
 
 import Navbar from './Navbar'
+import PortfolioDisplay from './Portfolio-display'
 
 import '../styles/Portfolios.css'
 
@@ -13,7 +13,6 @@ const DOWNLOAD_URL = '/download-stock'
 
 const PortfolioLive = () => {
   const { auth } = useContext(AuthContext)
-  //const [ currentPortfolio ] = useGetPortfolio(auth.userId)
   const errRef = useRef();
 
   const [ tickInput, setTickInput ] = useState('')
@@ -35,6 +34,7 @@ const PortfolioLive = () => {
     try {
       const response = await axios.post(DOWNLOAD_URL, 
         JSON.stringify({
+          user: auth.userId,
           tick: tickInput,
           startDate: tickStartDate,
           endDate: tickEndDate
@@ -51,7 +51,7 @@ const PortfolioLive = () => {
 
   return (
     <>
-      < Navbar />
+      <Navbar />
       <div className='portfolio-live-main'>
         <form className='input-form' onSubmit={handleDownloadClick}>
           <label htmlFor='tickCode'>
@@ -91,7 +91,7 @@ const PortfolioLive = () => {
 
 
         <div className='portfolio-display'>
-
+          <PortfolioDisplay />
         </div>
       </div>
 

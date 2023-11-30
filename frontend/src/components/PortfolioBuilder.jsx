@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios'
 
-import { useUserId } from '../context/userContext';
 import useGetPortfolio from '../states/useGetPortfolio';
 import { CheckDatesValid } from '../logic/portfolioBuilder';
 import AuthContext from '../context/authProvider';
@@ -13,7 +12,6 @@ import '../styles/Home.css';
 
 const Portfoliobuilder = () => {
   const { auth } = useContext(AuthContext)
-  const userId = useUserId();
   const [ portfolioAssets ] = useGetPortfolio(auth.userId)
   const [ tickerInputValue, setTickerInputValue ] = useState('')
   const [ tickerStartRangeValue, setTickerStartRangeValue ] = useState('')
@@ -65,7 +63,7 @@ const Portfoliobuilder = () => {
           onChange={(e) => setTickerEndRangeValue(e.target.value)}
         />
         <button className='grid-item-download-button' onClick={handleDownloadStockClick} >Download</button>
-        <p className="grid-item-portfolio-display-header">Current Assets for user {userId}</p>
+        <p className="grid-item-portfolio-display-header">Current Assets for user {auth.userId}</p>
         <ul className='grid-item-portfolio-display-list'> {portfolioAssets.length > 0 && portfolioAssets.map((item) => <li>{item}</li>)} </ul>
       </div>
     </>
