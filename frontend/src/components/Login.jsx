@@ -9,7 +9,7 @@ import '../styles/Login.css'
 const LOGIN_URL = '/login-submit'
 
 function Login() {
-  const { setAuth } = useContext(AuthContext)
+  const { auth, setAuth } = useContext(AuthContext)
   const userRef = useRef();
   const errRef = useRef();
 

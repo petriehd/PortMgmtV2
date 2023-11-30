@@ -1,13 +1,12 @@
 import Navbar from "./Navbar";
-import PortfolioBuilder from "./PortfolioBuilder";
+import PortfolioLive from "./Portfolio-live";
 import '../styles/Home.css'
 
 function Home() {
   return (
     <>
-      <div><Navbar /></div>
       <div className="grid-container">
-        <div><PortfolioBuilder /></div>
+        <div><PortfolioLive /></div>
       </div>
     </>
   )

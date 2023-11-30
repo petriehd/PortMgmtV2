@@ -1,13 +1,36 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import AuthContext from '../context/authProvider'
-import useGetPortfolio from '../states/useGetPortfolio'
+import axios from "../axios";
 
 import '../styles/Portfolios.css'
 
+const GET_PORTFOLIO = '/get-portfolio/'
+
 const PortfolioDisplay = () => {
   const { auth } = useContext(AuthContext)
-  const [ currentPortfolio ] = useGetPortfolio(auth.userId)
+  const [ currentPortfolio, setCurrentPortfolio ] = useState([])
+
+  useEffect(() => {
+    const a = async () => {
+      try {
+        const response = axios.get(GET_PORTFOLIO + `${auth.userId}`,
+          {
+            headers: {'Content-Type': 'application/json'},
+            withCredentials: true
+          }
+        );
+        const assets = response.data.assets
+        const assetNames = []
+        for (let i = 0; i < assets.length; i++) {
+          assetNames.push(assets[i].name);
+        }
+        setCurrentPortfolio(assetNames)
+      } catch {
+  
+      }
+    }
+  })
 
   return (
     <>

@@ -9,7 +9,7 @@ import PortfolioDisplay from './Portfolio-display'
 
 import '../styles/Portfolios.css'
 
-const DOWNLOAD_URL = '/download-stock'
+const DOWNLOAD_URL = `/download-stock/`
 
 const PortfolioLive = () => {
   const { auth } = useContext(AuthContext)
@@ -32,9 +32,8 @@ const PortfolioLive = () => {
       return;
     }
     try {
-      const response = await axios.post(DOWNLOAD_URL, 
+      const response = await axios.post(DOWNLOAD_URL + `${auth.userId}`, 
         JSON.stringify({
-          user: auth.userId,
           tick: tickInput,
           startDate: tickStartDate,
           endDate: tickEndDate
@@ -90,9 +89,9 @@ const PortfolioLive = () => {
         </form>
 
 
-        <div className='portfolio-display'>
+      </div>
+      <div className='portfolio-display'>
           <PortfolioDisplay />
-        </div>
       </div>
 
     </>
