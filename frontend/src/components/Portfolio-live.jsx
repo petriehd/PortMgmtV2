@@ -10,6 +10,7 @@ import PortfolioDisplay from './Portfolio-display'
 import '../styles/Portfolios.css'
 
 const DOWNLOAD_URL = `/download-stock/`
+const GET_PORTFOLIO_URL = '/get-portfolio/'
 
 const PortfolioLive = () => {
   const { auth } = useContext(AuthContext)
@@ -19,12 +20,30 @@ const PortfolioLive = () => {
   const [ tickStartDate, setTickStateDate ] = useState('')
   const [ tickEndDate, setTickEndDate ] = useState('')
   const [ errMsg, setErrMsg ] = useState('')
+  const [ currentPortfolio, setCurrentPortfolio ] = useState([])
 
-  console.log('logged in with: ', auth.userId)
+  console.log('logged in with: ', userId)
 
   useEffect(() => {
     setErrMsg('')
   }, [ tickInput, tickStartDate, tickEndDate ])
+
+  const fetchPortfolio = async () => {
+    try { 
+      const response = await axios.get(GET_PORTFOLIO_URL + `${userId}`,
+          {
+            headers: {'Content-Type': 'application/json'},
+            withCredentials: true
+          }
+        );
+        const assets = response.data.assets
+        const assetNames = assets.map((asset) => asset.name);
+        setCurrentPortfolio(assetNames)
+      } 
+    catch {
+
+    }
+  }
 
   const handleDownloadClick = async () => {
     if (!CheckDatesValid(tickStartDate, tickEndDate)) {
@@ -32,7 +51,7 @@ const PortfolioLive = () => {
       return;
     }
     try {
-      const response = await axios.post(DOWNLOAD_URL + `${auth.userId}`, 
+      const response = await axios.post(DOWNLOAD_URL + `${userId}`, 
         JSON.stringify({
           tick: tickInput,
           startDate: tickStartDate,
@@ -43,6 +62,7 @@ const PortfolioLive = () => {
           withCredentials: true
         }
       );
+      //fetchPortfolio()
     } catch {
 
     } 
@@ -91,7 +111,8 @@ const PortfolioLive = () => {
 
       </div>
       <div className='portfolio-display'>
-          <PortfolioDisplay />
+        <p>Current assets for user {auth.userId}</p>
+        <ul> {currentPortfolio.map((item) => <li>{item}</li>)}</ul>
       </div>
 
     </>
