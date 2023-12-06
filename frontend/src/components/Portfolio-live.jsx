@@ -5,7 +5,6 @@ import AuthContext from '../context/authProvider'
 import { CheckDatesValid } from '../logic/portfolioBuilder'
 
 import Navbar from './Navbar'
-import PortfolioDisplay from './Portfolio-display'
 
 import '../styles/Portfolios.css'
 
@@ -21,8 +20,9 @@ const PortfolioLive = () => {
   const [ tickEndDate, setTickEndDate ] = useState('')
   const [ errMsg, setErrMsg ] = useState('')
   const [ currentPortfolio, setCurrentPortfolio ] = useState([])
+  const [ portfolioUpdate, setPortfolioUpdate ] = useState(true)
 
-  console.log('logged in with: ', userId)
+  console.log('logged in with: ', auth.userId)
 
   useEffect(() => {
     setErrMsg('')
@@ -30,7 +30,7 @@ const PortfolioLive = () => {
 
   const fetchPortfolio = async () => {
     try { 
-      const response = await axios.get(GET_PORTFOLIO_URL + `${userId}`,
+      const response = await axios.get(GET_PORTFOLIO_URL + `${1}`,
           {
             headers: {'Content-Type': 'application/json'},
             withCredentials: true
@@ -45,13 +45,19 @@ const PortfolioLive = () => {
     }
   }
 
+  useEffect(() => {
+    fetchPortfolio();
+    setPortfolioUpdate(false)
+  }, [ portfolioUpdate ])
+
+
   const handleDownloadClick = async () => {
     if (!CheckDatesValid(tickStartDate, tickEndDate)) {
       setErrMsg('Dates not valid')
       return;
     }
     try {
-      const response = await axios.post(DOWNLOAD_URL + `${userId}`, 
+      const response = await axios.post(DOWNLOAD_URL + `${auth.userId}`, 
         JSON.stringify({
           tick: tickInput,
           startDate: tickStartDate,
@@ -62,7 +68,6 @@ const PortfolioLive = () => {
           withCredentials: true
         }
       );
-      //fetchPortfolio()
     } catch {
 
     } 
@@ -112,7 +117,13 @@ const PortfolioLive = () => {
       </div>
       <div className='portfolio-display'>
         <p>Current assets for user {auth.userId}</p>
-        <ul> {currentPortfolio.map((item) => <li>{item}</li>)}</ul>
+        {currentPortfolio?.length
+          ? (
+              <ul> 
+                {currentPortfolio.map((item) => <li>{item}</li>)}
+              </ul>
+          ) : <p>No assets to show</p>
+        }     
       </div>
 
     </>
