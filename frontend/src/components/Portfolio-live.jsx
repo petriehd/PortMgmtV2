@@ -5,11 +5,11 @@ import AuthContext from '../context/authProvider'
 import { CheckDatesValid } from '../logic/portfolioBuilder'
 
 import Navbar from './Navbar'
-import PortfolioDisplay from './Portfolio-display'
 
 import '../styles/Portfolios.css'
 
 const DOWNLOAD_URL = `/download-stock/`
+const GET_PORTFOLIO_URL = '/get-portfolio/'
 
 const PortfolioLive = () => {
   const { auth } = useContext(AuthContext)
@@ -19,12 +19,37 @@ const PortfolioLive = () => {
   const [ tickStartDate, setTickStateDate ] = useState('')
   const [ tickEndDate, setTickEndDate ] = useState('')
   const [ errMsg, setErrMsg ] = useState('')
+  const [ currentPortfolio, setCurrentPortfolio ] = useState([])
+  const [ portfolioUpdate, setPortfolioUpdate ] = useState(true)
 
   console.log('logged in with: ', auth.userId)
 
   useEffect(() => {
     setErrMsg('')
   }, [ tickInput, tickStartDate, tickEndDate ])
+
+  const fetchPortfolio = async () => {
+    try { 
+      const response = await axios.get(GET_PORTFOLIO_URL + `${1}`,
+          {
+            headers: {'Content-Type': 'application/json'},
+            withCredentials: true
+          }
+        );
+        const assets = response.data.assets
+        const assetNames = assets.map((asset) => asset.name);
+        setCurrentPortfolio(assetNames)
+      } 
+    catch {
+
+    }
+  }
+
+  useEffect(() => {
+    fetchPortfolio();
+    setPortfolioUpdate(false)
+  }, [ portfolioUpdate ])
+
 
   const handleDownloadClick = async () => {
     if (!CheckDatesValid(tickStartDate, tickEndDate)) {
@@ -91,7 +116,14 @@ const PortfolioLive = () => {
 
       </div>
       <div className='portfolio-display'>
-          <PortfolioDisplay />
+        <p>Current assets for user {auth.userId}</p>
+        {currentPortfolio?.length
+          ? (
+              <ul> 
+                {currentPortfolio.map((item) => <li>{item}</li>)}
+              </ul>
+          ) : <p>No assets to show</p>
+        }     
       </div>
 
     </>

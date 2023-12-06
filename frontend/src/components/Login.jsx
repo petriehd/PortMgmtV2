@@ -40,7 +40,8 @@ function Login() {
       );
       const accessToken = response?.data?.accessToken;
       const userId = response?.data?._id
-      setAuth({ userId, userPassword, accessToken })
+      const auth = { userId, userPassword, accessToken }
+      setAuth(auth)
       navigate('/home')
     } catch (err) {
       if (!err?.response) {
